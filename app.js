@@ -19,7 +19,7 @@ server.listen(PORT, console.log(`Server listening at ${PORT}`));
 
 io.on('connection', function (socket) {
   console.log(`${socket.id}:  Đã kết nối`)
-  socket.on('disconnect', () => console.log(`Hủy kế nối :  ${socket.id}`))
+  socket.on('disconnect', () => console.log(`Hủy kết nối :  ${socket.id}`))
   socket.on('userMessage', (data) => {
     socket.broadcast.emit('message-sender', data)
   });
