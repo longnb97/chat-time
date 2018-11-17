@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <title>Express</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row dong1">
+      <input type="text" class="name" placeholder="What 's your name ?'" aria-describedby="basic-addon1">
+    </div>
+    <div class="row dong2">
+      <div class="input-group mb-3">
+        <input type="text" class="text form-control" placeholder="type something here..." aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const socket = io();
+  let name;
+  $(document).ready(function () {
+    $('.btn').on('click', function () {
+      name = $('.name').val();
+      if (!name) {
+        alert('Please type your name!')
+      } else {
+        $('.dong1').css('opacity', '0');
+        let chatContent = $('.text').val()
+        socket.emit('userMessage', {name , chatContent})
+        socket.on('message-sender', (data) => {
+          console.log(`${data.name}: ${data.chatContent}`)
+        })
+        socket.on('sleepy', (data) => {
+          socket.emit('stayWithMe', 'stayFocusBae!')
+        })
+      }
+    })
+  }) 
+</script>
+
+</html>
