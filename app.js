@@ -18,8 +18,8 @@ server.listen(PORT, console.log(`Server listening at ${PORT}`));
 // WARNING: app.listen(80) will NOT work here!
 
 io.on('connection', function (socket) {
-  console.log(`${socket.id}:  da ket noi`)
-  socket.on('disconnect', () => console.log(`huy ket noi :  ${socket.id}`))
+  console.log(`${socket.id}:  đã kết nối`)
+  socket.on('disconnect', () => console.log(`Hủy kế nối :  ${socket.id}`))
   socket.on('userMessage', (data) => {
     socket.broadcast.emit('message-sender', data)
   });
