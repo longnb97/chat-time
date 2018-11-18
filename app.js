@@ -15,17 +15,17 @@ const cors = require('cors');
 app.use(cors());
 
 server.listen(PORT, console.log(`Server listening at ${PORT}`));
-// WARNING: app.listen(80) will NOT work here!
 
 io.on('connection', function (socket) {
   console.log(`${socket.id}:  Đã kết nối(Connected)`)
   socket.on('disconnect', () => console.log(`Hủy kết nối(Disconnected) :  ${socket.id}`))
+  socket.emit('socketid', socket.id);
   socket.on('userMessage', (data) => {
-    socket.broadcast.emit('message-sender', data)
+    socket.emit('message-sender', data)
   });
   setInterval(function(){
     socket.emit('sleepy', "doSomeThingFunny !")
-  },1000*60*60)
+  },20000)
   socket.on('stayWithMe', (data) => console.log(data))
 });
 
