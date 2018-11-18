@@ -20,6 +20,7 @@ io.on('connection', function (socket) {
   console.log(`${socket.id}:  Đã kết nối(Connected)`)
   socket.on('disconnect', () => console.log(`Hủy kết nối(Disconnected) :  ${socket.id}`))
   socket.emit('socketid', socket.id);
+  socket.on('set-nickname',data => console.log(data))
   socket.on('userMessage', (data) => {
     socket.emit('message-sender', data)
   });
