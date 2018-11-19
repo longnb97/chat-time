@@ -49,11 +49,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const INDEX = path.join(__dirname, 'index.html');
+const TEST = path.join(__dirname, 'test.html');
 
 app.get('/', home);
 
 function home(req, res) {
-  res.sendFile(INDEX);
+  res.sendFile(TEST);
 }
 
